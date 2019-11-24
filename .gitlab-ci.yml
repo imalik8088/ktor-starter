@@ -11,9 +11,6 @@ cache:
 package:
   stage: build
   script:
-    - ./gradlew assemble
-
-test:
-  stage: test
-  script:
     - ./gradlew check
+  services:
+    - mongo:4

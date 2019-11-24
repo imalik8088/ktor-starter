@@ -1,0 +1,15 @@
+version: "3.2"
+services:
+
+ mongo:
+   container_name: mongo_mein_chanda
+   image: mongo:4
+   ports:
+   - "27017:27017"
+   volumes:
+   - type: volume
+     source: mein-chanda-volume
+     target: /data/db
+
+volumes:
+  mein-chanda-volume:

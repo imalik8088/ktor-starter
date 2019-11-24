@@ -1,8 +1,8 @@
 package io.imalik8088.meinchanda
 
 import com.fasterxml.jackson.databind.SerializationFeature
+import io.imalik8088.meinchanda.controller.userRoutes
 import io.ktor.application.Application
-import io.ktor.application.call
 import io.ktor.application.install
 import io.ktor.features.*
 import io.ktor.http.HttpHeaders
@@ -11,15 +11,18 @@ import io.ktor.http.content.resources
 import io.ktor.http.content.static
 import io.ktor.jackson.jackson
 import io.ktor.request.path
-import io.ktor.response.respond
-import io.ktor.routing.get
 import io.ktor.routing.routing
+import org.koin.dsl.module
+import org.koin.ktor.ext.Koin
+import org.litote.kmongo.coroutine.coroutine
+import org.litote.kmongo.reactivestreams.KMongo
 import org.slf4j.event.Level
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
 @kotlin.jvm.JvmOverloads
 fun Application.module(testing: Boolean = false) {
+
     install(ContentNegotiation) {
         jackson {
             enable(SerializationFeature.INDENT_OUTPUT)
@@ -52,18 +55,21 @@ fun Application.module(testing: Boolean = false) {
         anyHost() // @TODO: Don't do this in production if possible. Try to limit it.
     }
 
+    install(Koin) {
+        modules(module)
+    }
+
     routing {
-        get("/") {
-            call.respond("HELLO WORLD!")
-        }
+        userRoutes()
 
         static("/static") {
             resources("static")
         }
-
-        get("/json/jackson") {
-            call.respond(mapOf("hello" to "world"))
-        }
     }
 }
 
+const val API_VERSION = "/api/v1"
+
+val module = module {
+    single { KMongo.createClient("mongodb://localhost:27017").coroutine }
+}
