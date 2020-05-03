@@ -1,7 +1,7 @@
-package io.imalik8088.meinchanda
+package io.imalik8088.github.ktorstarter
 
 class Constants {
     companion object {
-        @JvmField val DATABASE = "mein-chanda"
+        @JvmField val DATABASE = "ktor-starter"
     }
 }
