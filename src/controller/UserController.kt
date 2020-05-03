@@ -1,8 +1,8 @@
-package io.imalik8088.meinchanda.controller
+package io.imalik8088.github.ktorstarter.controller
 
 import com.fasterxml.jackson.annotation.JsonIgnore
-import io.imalik8088.meinchanda.API_VERSION
-import io.imalik8088.meinchanda.Constants.Companion.DATABASE
+import io.imalik8088.github.ktorstarter.API_VERSION
+import io.imalik8088.github.ktorstarter.Constants.Companion.DATABASE
 import io.ktor.application.call
 import io.ktor.http.HttpStatusCode
 import io.ktor.response.respond
@@ -15,7 +15,7 @@ import org.koin.ktor.ext.inject
 import org.litote.kmongo.coroutine.CoroutineClient
 import org.litote.kmongo.eq
 import org.slf4j.LoggerFactory
-import java.util.*
+import java.util.UUID
 
 val ENDPOINT = "$API_VERSION/users"
 

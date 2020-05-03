@@ -11,8 +11,8 @@ buildscript {
 apply plugin: 'kotlin'
 apply plugin: 'application'
 
-group 'io.imalik8088.meinchanda'
-version '1.0.0-SNAPSHOT'
+group 'io.imalik8088.github.ktorstarter'
+version '0.0.1-SNAPSHOT'
 mainClassName = "io.ktor.server.netty.EngineMain"
 
 sourceSets {
@@ -36,6 +36,8 @@ dependencies {
     compile "io.ktor:ktor-server-host-common:$ktor_version"
     compile "io.ktor:ktor-jackson:$ktor_version"
     testCompile "io.ktor:ktor-server-tests:$ktor_version"
+    compile "io.ktor:ktor-auth:$ktor_version"
+    compile("io.ktor:ktor-client-apache:$ktor_version")
 
     compile "org.koin:koin-ktor:$koin_version"
     compile "org.koin:koin-core-ext:$koin_version"
