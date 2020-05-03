@@ -1,4 +1,4 @@
-package io.imalik8088.meinchanda
+package io.imalik8088.github.ktorstarter
 
 import io.ktor.http.HttpMethod
 import io.ktor.http.HttpStatusCode

@@ -1,15 +1,30 @@
-version: "3.2"
-services:
+version: "3.7"
 
- mongo:
-   container_name: mongo_mein_chanda
-   image: mongo:4
-   ports:
-   - "27017:27017"
-   volumes:
-   - type: volume
-     source: mein-chanda-volume
-     target: /data/db
+services:
+  mongo:
+    image: mongo:4
+    container_name: ktor-starter-mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - type: volume
+        source: ktor-starter-mongodb-volume
+        target: /data/db
+    healthcheck:
+      test: echo 'db.stats().ok' | mongo localhost:27017 --quiet
+      start_period: 10s
+
+  keycloak:
+    image: jboss/keycloak:8.0.1
+    container_name: ktor-starter-keycloak
+    ports:
+      - "18080:8080"
+    environment:
+      - KEYCLOAK_USER=admin
+      - KEYCLOAK_PASSWORD=admin
+    healthcheck:
+      test: "curl -f http://localhost:8080/auth || exit 1"
+      start_period: 30s
 
 volumes:
-  mein-chanda-volume:
+  ktor-starter-mongodb-volume:
